@@ -2,7 +2,7 @@
 
 # Daruma
 
-A simple app to add your resolutions (yearly, monthly or daily) and help you stick with those!
+A simple app to add your resolutions and help you stick with those!
 
 The idea comes from the will of helping me and others to stick with the chosen resolutions.
 

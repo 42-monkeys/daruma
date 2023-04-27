@@ -67,6 +67,6 @@ class ResolutionsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def resolution_params
-    params.require(:resolution).permit(:body)
+    params.require(:resolution).permit(:body, :target_time, :commitment, :temper)
   end
 end

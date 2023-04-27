@@ -14,6 +14,10 @@
   <div>
     <%= form.label :body, style: "display: block" %>
     <%= form.rich_text_area :body %>
+    <%= form.date_field :target_time, min: 0.days.ago, value: Date.today + 1.week %>
+    <%= form.select :commitment, Resolution.commitment_types.keys %>
+    <%= form.select :temper, Resolution.temper_types.keys %>
+
   </div>
 
   <div>
