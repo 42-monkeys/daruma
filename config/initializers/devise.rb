@@ -14,9 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # rubocop:disable Layout/LineLength
-  # config.secret_key = 'b3d6bd3cc794ca177f2948152c817a624d170f0991edd3106e2a2077ff8ee70fbf427179b6cacfeca5e1f2d5a6a364b170abf8ecf18166269b999fd642e9d111'
-  # rubocop:enable Layout/LineLength
+  # config.secret_key = '3e5c4f947124175bae3d5359e91ec07c52a9db33e5aabbf02bb515c5c6b44f21501105eeeb272a61a84716ef380a3d703daa9ac85eb2aa0cae0232e884c2537d'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -128,9 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # rubocop:disable Layout/LineLength
-  # config.pepper = 'a48b9f4c63af4bd1c4b37492de6395d0efb3c5c2950714d022772f22e72b36a4ea5502b9d7ad132447247207226ee58f604158b29d2714a14db0d1837b6f9842'
-  # rubocop:enable Layout/LineLength
+  # config.pepper = '488c5f0482e37c3e56f32b873499bea93c3c6d78b5b52ec2f4f79a7bce6d630e7b16a2184126f8ddac26afc59dabc59e3f96fb8d0a7a24e80b70acb277b8f979'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -314,4 +310,14 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials[:devise_jwt_secret_key]
+    jwt.dispatch_requests = [
+      ['POST', %r{^/sign_in$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/sign_out$}]
+    ]
+    jwt.expiration_time = 15.days.to_i
+  end
 end

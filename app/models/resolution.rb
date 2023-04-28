@@ -8,14 +8,8 @@ class Resolution < ApplicationRecord
 
   has_rich_text :body
 
-  enum :commitment_types, [ :low, :moderate, :high ]
-  enum :temper_types, [ :motivational, :sarcastic, :authoritarian, :random ]
-  # colori daruma
-
-  # motivational    dorato
-  # sarcastic       verde
-  # authoritarian   nero
-  # random          rosso
+  enum :commitment_types, %i[low moderate high]
+  enum :temper_types, %i[motivational sarcastic authoritarian random]
 
   belongs_to :user
 end

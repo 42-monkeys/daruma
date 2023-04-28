@@ -23,6 +23,7 @@ class ResolutionsController < ApplicationController
   # POST /resolutions or /resolutions.json
   def create
     @resolution = Resolution.new(resolution_params)
+    @resolution.user = current_user
 
     respond_to do |format|
       if @resolution.save
