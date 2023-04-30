@@ -1,0 +1,68 @@
+# Name of your application. Used to uniquely configure containers.
+service: provona
+
+# Name of the container image.
+image: baldarn/testone
+
+# Deploy to these servers.
+servers:
+  - cervellone.lan
+
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: baldarn
+
+  # Always use an access token rather than real password when possible.
+  password:
+    - MRSK_REGISTRY_PASSWORD
+
+# Inject ENV variables into containers (secrets come from .env).
+# env:
+#   clear:
+#     DB_HOST: 192.168.0.2
+#   secret:
+#     - RAILS_MASTER_KEY
+
+# Call a broadcast command on deploys.
+# audit_broadcast_cmd:
+#   bin/broadcast_to_bc
+
+# Use a different ssh user than root
+ssh:
+  user: baldarn
+
+# Configure builder setup.
+builder:
+  local:
+    multiarch: false
+    host: unix:///Users/<%= `whoami`.strip %>/.docker/run/docker.sock
+  # remote:
+  #   arch: amd64
+  #   host: ssh://app@192.168.0.1
+
+# Use accessory services (secrets come from .env).
+# accessories:
+#   db:
+#     image: postgres:15.2
+#     host: cervellone.lan
+#     port: 3306
+#     env:
+#       clear:
+#         MYSQL_ROOT_HOST: '%'
+#       secret:
+#         - POSTGRES_PASSWORD
+#     directories:
+#       - postgres:/var/lib/mysql
+
+# Configure custom arguments for Traefik
+# traefik:
+#   args:
+#     accesslog: true
+#     accesslog.format: json
+
+# Configure a custom healthcheck (default is /up on port 3000)
+# healthcheck:
+#   path: /healthz
+#   port: 4000

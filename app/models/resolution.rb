@@ -5,6 +5,7 @@ class Resolution < ApplicationRecord
   validates :commitment, presence: true
   validates :target_time, presence: true
   validates :temper, presence: true
+  validates :offer, numericality: { only_numeric: true } # TODO: positive ;)
 
   has_rich_text :body
 
