@@ -3,11 +3,9 @@
 class Resolution < ApplicationRecord
   validates :body, presence: true
   validates :commitment, presence: true
-  validates :target_time, presence: true
+  validates :time_limit, presence: true
   validates :temper, presence: true
-  validates :offer, numericality: { only_numeric: true } # TODO: positive ;)
-
-  has_rich_text :body
+  validates :offer, allow_blank: true, numericality: { only_numeric: true } # TODO: positive ;)
 
   enum :commitment_types, %i[low moderate high]
   enum :temper_types, %i[motivational sarcastic authoritarian random]
