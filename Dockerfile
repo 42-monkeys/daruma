@@ -1,16 +1,10 @@
-# syntax=docker/dockerfile:1
-FROM ruby:3.2.1
-# RUN apt-get update -qq && apt-get install -y imagemagick ffmpeg
-RUN apt-get update -qq && apt-get install -y build-essential
+FROM ruby:3-alpine
 WORKDIR /app
-COPY Gemfile Gemfile.lock /app/
+COPY . .
+RUN apk add --no-cache build-base tzdata nodejs yarn sqlite-dev
+RUN gem install bundler
 RUN bundle install
-
-# Add a script to be executed every time the container starts.
-COPY docker/entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
+ENV RAILS_ENV=production
+RUN bundle exec rails assets:precompile
 EXPOSE 3000
-
-# Configure the main process to run when running the image
 CMD ["rails", "server", "-b", "0.0.0.0"]

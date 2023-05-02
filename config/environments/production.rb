@@ -2,7 +2,7 @@
 
 require 'active_support/core_ext/integer/time'
 
-Rails.application.config.hosts << 'daruma.farnararo.it'
+Rails.application.config.hosts << 'daruma.42monkeys.it'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -47,9 +47,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
-  config.action_cable.allowed_request_origins = ['daruma.farnararo.it']
-
-  config.hosts << 'daruma.farnararo.it'
+  config.action_cable.allowed_request_origins = ['daruma.42monkeys.it']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

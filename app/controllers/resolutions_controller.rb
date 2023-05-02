@@ -10,7 +10,7 @@ class ResolutionsController < ApplicationController
 
   # GET /resolutions/1 or /resolutions/1.json
   def show
-    @resolution = Resolution.find(id: params[:id], user: current_user)
+    @resolution = Resolution.find_by(id: params[:id], user: current_user)
   end
 
   # GET /resolutions/new
