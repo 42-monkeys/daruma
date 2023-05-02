@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ResolutionsController < ApplicationController
-  before_action :set_resolution, only: %i[show edit update destroy]
+  before_action :set_resolution, only: %i[show]
 
   # GET /resolutions or /resolutions.json
   def index
