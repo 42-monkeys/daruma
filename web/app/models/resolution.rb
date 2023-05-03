@@ -22,7 +22,7 @@ class Resolution < ApplicationRecord
         messages: [{
           role: 'user',
           content: "
-          write a #{temper_for_request} sentence using at most 80 words in #{user.language} for my proposition.
+          write a #{temper_for_request} sentence to motivate me using at most 80 words in #{user.language} for my proposition.
           The proposition is delimited with triple backticks ```#{body}```
           "
         }]
@@ -35,6 +35,6 @@ class Resolution < ApplicationRecord
   def temper_for_request
     return Resolution.tempers.excluding('random').keys.sample if temper_random?
 
-    Resolution.tempers.keys[temper]
+    temper
   end
 end
