@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:alpine3.17
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+  web:
+    container_name: daruma
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./web:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db

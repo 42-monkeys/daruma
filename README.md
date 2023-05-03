@@ -20,7 +20,7 @@ You can chose some things when making a resolution:
 
 A simple text that identifies your resolution (e.g: I want to pass the math exam).
 
-### Temper 
+### Temper
 
 This selects how Daruma will help you. The messages that will arrives will be modulated based on the chosen temper. If random is selected, it will change every time ;)
 
@@ -45,3 +45,15 @@ The success of the resolution is self declared, of course ;)
 # Business model
 
 If people make offers, this amounts of money will be used to trade with NO risk (but low income of course)
+
+# Development
+
+rails console on container
+```
+docker exec -it daruma rails c
+```
+
+debug
+```
+docker attach daruma
+```
