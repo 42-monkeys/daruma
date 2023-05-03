@@ -9,6 +9,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.input :name %>
+  </div>
+
+  <div class="field">
     <%= f.label :language %><br />
     <%= f.select :language, User.languages %>
   </div>

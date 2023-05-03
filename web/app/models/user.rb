@@ -9,5 +9,6 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   has_many :resolutions, dependent: :destroy
+  validates :name, presence: true
   validates :language, presence: true, inclusion: { in: languages }
 end
