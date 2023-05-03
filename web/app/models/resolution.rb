@@ -20,12 +20,14 @@ class Resolution < ApplicationRecord
         model: 'gpt-3.5-turbo',
         messages: [{
           role: 'user',
-          content: "write a brief #{temper_for_request} sentence in #{user.language} for my proposition: #{body}"
+          content: "
+          write a #{temper_for_request} sentence using at most 80 words in #{user.language} for my proposition.
+          The proposition is delimited with triple backticks ```#{body}```
+          "
         }]
       }
     )
-
-    response['choices'].first.dig('message', 'content')
+    response.dig('choices', 0, 'message', 'content').gsub('```', '')
   end
 
   def temper_for_request
