@@ -2,7 +2,7 @@
 
 require 'active_support/core_ext/integer/time'
 
-Rails.application.config.hosts << 'daruma.42monkeys.it'
+Rails.application.config.hosts << 'daruma.42monkeys.eu'
 Rails.application.config.hosts << 'localhost' # to try locally ;)
 
 Rails.application.configure do
@@ -48,7 +48,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = "wss://example.com/cable"
-  config.action_cable.allowed_request_origins = ['daruma.42monkeys.it']
+  config.action_cable.allowed_request_origins = ['daruma.42monkeys.eu']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true

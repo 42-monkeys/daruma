@@ -15,6 +15,7 @@ services:
       dockerfile: docker/Dockerfile
     stdin_open: true
     tty: true
+    restart: on-failure
     volumes:
       - ./web:/app
     ports:
