@@ -11,6 +11,7 @@ class Resolution < ApplicationRecord
   enum :temper, %i[motivational sarcastic authoritarian random], prefix: true
 
   belongs_to :user
+  has_many :reminders, dependent: :destroy
 
   def reminder
     client = OpenAI::Client.new
@@ -27,7 +28,8 @@ class Resolution < ApplicationRecord
         }]
       }
     )
-    response.dig('choices', 0, 'message', 'content').gsub('```', '')
+    ai_generated_text = response.dig('choices', 0, 'message', 'content').gsub('```', '')
+    reminders << Reminder.create(body: ai_generated_text)
   end
 
   def temper_for_request
