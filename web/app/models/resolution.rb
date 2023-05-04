@@ -14,12 +14,24 @@ class Resolution < ApplicationRecord
   has_many :reminders, dependent: :destroy
 
   def generate_reminder
-    reminder = Reminder.create(body: reminder_text, resolution: self)
+    ai_reminder = generate_ai_reminder
+    reminder = Reminder.create(
+      body: ai_reminder[:text],
+      prompt_tokens: ai_reminder[:prompt_tokens],
+      completion_tokens: ai_reminder[:completion_tokens],
+      resolution: self
+    )
     reminder.remind
   end
 
-  def reminder_text
-    return 'reminder text' if Rails.env.test? || Rails.env.development?
+  def generate_ai_reminder
+    if Rails.env.test? || Rails.env.development?
+      return {
+        prompt_tokens: 0,
+        completion_tokens: 0,
+        text: 'some generated text'
+      }
+    end
 
     client = OpenAI::Client.new
 
@@ -29,7 +41,12 @@ class Resolution < ApplicationRecord
         messages: [{ role: 'user', content: prompt.squish }]
       }
     )
-    response.dig('choices', 0, 'message', 'content').gsub('```', '')
+
+    {
+      prompt_tokens: response.dig('usage', 'prompt_tokens'),
+      completion_tokens: response.dig('usage', 'completion_tokens'),
+      text: response.dig('choices', 0, 'message', 'content').gsub('```', '')
+    }
   end
 
   def prompt

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_121918) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_04_145026) do
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti", null: false
     t.datetime "exp", null: false
@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_121918) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "sent"
+    t.integer "prompt_tokens"
+    t.integer "completion_tokens"
     t.index ["resolution_id"], name: "index_reminders_on_resolution_id"
   end
 

@@ -11,7 +11,7 @@ class ResolutionTest < ActiveSupport::TestCase
     @resolution.generate_reminder
 
     reminder = @resolution.reminders.first
-    assert_equal(reminder.body, 'reminder text')
+    assert_equal(reminder.body, 'some generated text')
     assert(reminder.sent)
   end
 
