@@ -19,9 +19,6 @@ class Resolution < ApplicationRecord
   end
 
   def reminder_text
-
-    return 'lollete'
-
     client = OpenAI::Client.new
 
     response = client.chat(
