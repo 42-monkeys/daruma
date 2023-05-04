@@ -1,7 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  body: MyText
-
-two:
-  body: MyText
+  body: resolution
+  commitment: low
+  temper: motivational
+  time_limit: <%= 2.days.from_now %>
+  user: one

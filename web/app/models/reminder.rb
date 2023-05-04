@@ -8,6 +8,8 @@ class Reminder < ApplicationRecord
 
   def remind
     send_email
+    self.sent = true
+    save
   end
 
   def send_notification

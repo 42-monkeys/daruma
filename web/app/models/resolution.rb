@@ -19,6 +19,8 @@ class Resolution < ApplicationRecord
   end
 
   def reminder_text
+    return 'reminder text' if Rails.env.test? || Rails.env.development?
+
     client = OpenAI::Client.new
 
     response = client.chat(
