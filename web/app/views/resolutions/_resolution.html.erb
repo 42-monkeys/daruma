@@ -1,25 +1,26 @@
 <div id="<%= dom_id resolution %>">
   <p>
-    Created <%= time_tag resolution.created_at, "data-local": "time-ago" %>
+    <%= t("resolutions.created") %> <%= time_tag resolution.created_at, "data-local": "time-ago" %>
   </p>
 
   <p>
-    <strong>Body:</strong>
+    <strong><%= t("resolutions.body") %>:</strong>
     <%= resolution.body %>
     <br>
-    <strong>Time limit:</strong>
-    <%= resolution.time_limit %>
+    <strong><%= t("resolutions.time_limit") %>:</strong>
+    <% days_left = (resolution.time_limit - Date.today).to_i %>
+    <%= resolution.time_limit %> (<%= days_left %> <%= t('datetime.prompts.day').pluralize(days_left) %> left)
     <br>
-    <strong>Commitment:</strong>
+    <strong><%= t("resolutions.commitment") %>:</strong>
     <%= resolution.commitment %>
     <br>
-    <strong>Temper:</strong>
+    <strong><%= t("resolutions.temper") %>:</strong>
     <%= resolution.temper %>
     <br>
-    <strong>Offer:</strong>
-    <%= resolution.offer %>
+    <strong><%= t("resolutions.offer") %>:</strong>
+    <%= resolution.offer || 0 %>
     <br>
-    <strong>Cost for daruma:</strong>
+    <strong><%= t("resolutions.cost_for_daruma") %>:</strong>
     <%= resolution.cost.round(5) %> $
   </p>
 </div>

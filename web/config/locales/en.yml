@@ -30,4 +30,15 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  resolutions:
+    created: "Created"
+    body: "Body"
+    time_limit: "Time limit"
+    commitment: "Commitment"
+    temper: "Temper"
+    offer: "Offer"
+    cost_for_daruma: "Cost for Daruma"
+    show_this_resolution: "Show this resolution"
+    new_resolution: "New resolution"
+    back_to_resolutions: "Back to resolutions"
+

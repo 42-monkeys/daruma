@@ -1,0 +1,12 @@
+it:
+  resolutions:
+    created: "Creata"
+    body: "Proposito"
+    time_limit: "Tempo limite"
+    commitment: "Impegno"
+    temper: "Carattere"
+    offer: "Offerta"
+    cost_for_daruma: "Costi per Daruma"
+    show_this_resolution: "Mostra questo proposito"
+    new_resolution: "Nuovo proposito"
+    back_to_resolutions: "Indietro ai propositi"

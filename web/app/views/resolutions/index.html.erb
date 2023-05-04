@@ -6,9 +6,9 @@
   <% @resolutions.each do |resolution| %>
     <%= render resolution %>
     <p>
-      <%= link_to "Show this resolution", resolution %>
+      <%= link_to t("resolutions.show_this_resolution"), resolution %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New resolution", new_resolution_path %>
+<%= link_to t("resolutions.new_resolution"), new_resolution_path %>
