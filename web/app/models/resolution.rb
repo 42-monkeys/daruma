@@ -13,6 +13,12 @@ class Resolution < ApplicationRecord
   belongs_to :user
   has_many :reminders, dependent: :destroy
 
+  def cost
+    gpt_cost_per_token = 0.002 / 1000
+    total_token_tor_resolution = reminders.sum('prompt_tokens + completion_tokens')
+    total_token_tor_resolution * gpt_cost_per_token
+  end
+
   def generate_reminder
     ai_reminder = generate_ai_reminder
     reminder = Reminder.create(
