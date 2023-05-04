@@ -5,3 +5,10 @@ one:
   temper: motivational
   time_limit: <%= 2.days.from_now %>
   user: one
+
+two:
+  body: resolution
+  commitment: low
+  temper: motivational
+  time_limit: <%= 2.days.from_now %>
+  user: one

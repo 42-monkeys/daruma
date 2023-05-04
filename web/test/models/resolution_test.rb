@@ -15,6 +15,20 @@ class ResolutionTest < ActiveSupport::TestCase
     assert(reminder.sent)
   end
 
+  test 'it starts with no memory' do
+    prompt = @resolution.prompt
+
+    assert_not(prompt.include?('must be different from these previous sentences, enclosed in double backticks'))
+  end
+
+  test 'it continues with memory' do
+    resolution = resolutions(:two)
+
+    prompt = resolution.prompt
+
+    assert(prompt.include?('must be different from these previous sentences, enclosed in double backticks'))
+  end
+
   test 'it gets temper if not random' do
     temper = @resolution.temper_for_request
 

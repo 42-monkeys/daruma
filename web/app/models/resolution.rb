@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Resolution < ApplicationRecord
-  validates :body, presence: true
+  validates :body, presence: true, length: { maximum: 150 }
   validates :commitment, presence: true
   validates :time_limit, presence: true
   validates :temper, presence: true
@@ -26,16 +26,23 @@ class Resolution < ApplicationRecord
     response = client.chat(
       parameters: {
         model: 'gpt-3.5-turbo',
-        messages: [{
-          role: 'user',
-          content: "
-          write a #{temper_for_request} sentence to motivate me using at most 80 words in #{user.language} for my proposition.
-          The proposition is delimited with triple backticks ```#{body}```
-          "
-        }]
+        messages: [{ role: 'user', content: prompt.squish }]
       }
     )
     response.dig('choices', 0, 'message', 'content').gsub('```', '')
+  end
+
+  def prompt
+    ret = "write a #{temper_for_request} sentence to motivate me using at most
+    50 words in #{user.language} for my proposition."
+
+    if reminders.count.positive?
+      ret += "must be different from these previous sentences, enclosed in double backticks:
+        #{reminders.last(5).map { |r| "``#{r.body}``" }.join(' ')}"
+    end
+
+    ret += "The proposition is delimited with triple backticks ```#{body}```"
+    ret
   end
 
   def temper_for_request
