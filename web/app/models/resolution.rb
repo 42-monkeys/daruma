@@ -13,7 +13,15 @@ class Resolution < ApplicationRecord
   belongs_to :user
   has_many :reminders, dependent: :destroy
 
-  def reminder
+  def generate_reminder
+    reminder = Reminder.create(body: reminder_text, resolution: self)
+    reminder.remind
+  end
+
+  def reminder_text
+
+    return 'lollete'
+
     client = OpenAI::Client.new
 
     response = client.chat(
@@ -28,8 +36,7 @@ class Resolution < ApplicationRecord
         }]
       }
     )
-    ai_generated_text = response.dig('choices', 0, 'message', 'content').gsub('```', '')
-    reminders << Reminder.create(body: ai_generated_text)
+    response.dig('choices', 0, 'message', 'content').gsub('```', '')
   end
 
   def temper_for_request
