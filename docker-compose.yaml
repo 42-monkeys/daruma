@@ -13,8 +13,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    stdin_open: true
-    tty: true
+    command: sh -c "bundle install && rails db:create && rails db:migrate && rails s -e production"
     restart: on-failure
     volumes:
       - ./web:/app
