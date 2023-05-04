@@ -55,6 +55,7 @@ gem 'image_processing', '~> 1.2'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'devise-jwt'
 gem 'rack-cors'
+gem 'rpush'
 gem 'ruby-openai'
 
 group :development, :test do
