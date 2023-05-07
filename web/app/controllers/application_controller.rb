@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+
   def set_locale
     parsed_locale = params[:locale]
     locale_to_set = I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : I18n.locale

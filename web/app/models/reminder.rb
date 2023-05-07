@@ -13,7 +13,7 @@ class Reminder < ApplicationRecord
   end
 
   def send_notification
-    # TODO:
+    # TODO: send to android
   end
 
   def send_email

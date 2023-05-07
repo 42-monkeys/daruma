@@ -7,8 +7,8 @@ class Resolution < ApplicationRecord
   validates :temper, presence: true
   validates :offer, allow_blank: true, numericality: { only_numeric: true, greater_than_or_equal_to: 0 }
 
-  enum :commitment, %i[low moderate high], prefix: true
-  enum :temper, %i[motivational sarcastic authoritarian random], prefix: true
+  enum :commitment, %i[low moderate high], suffix: true
+  enum :temper, %i[motivational sarcastic authoritarian random], suffix: true
 
   belongs_to :user
   has_many :reminders, dependent: :destroy
@@ -20,6 +20,8 @@ class Resolution < ApplicationRecord
   end
 
   def generate_reminder
+    return unless to_remind?
+
     ai_reminder = generate_ai_reminder
     reminder = Reminder.create(
       body: ai_reminder[:text],
@@ -69,8 +71,21 @@ class Resolution < ApplicationRecord
   end
 
   def temper_for_request
-    return Resolution.tempers.excluding('random').keys.sample if temper_random?
+    return Resolution.tempers.excluding('random').keys.sample if random_temper?
 
     temper
+  end
+
+  def to_remind?
+    return false if time_limit < Date.today
+
+    last_reminder_date = reminders.order(created_at: :desc).limit(1).pick(:created_at)&.to_date
+    return true if last_reminder_date.nil?
+
+    return true if low_commitment? && last_reminder_date + 7.days <= Date.today
+    return true if moderate_commitment? && last_reminder_date + 3.days <= Date.today
+    return true if high_commitment? && last_reminder_date + 1.day <= Date.today
+
+    false
   end
 end

@@ -6,9 +6,16 @@ one:
   time_limit: <%= 2.days.from_now %>
   user: one
 
-two:
+with_reminder:
   body: resolution
   commitment: low
   temper: motivational
   time_limit: <%= 2.days.from_now %>
+  user: one
+
+elapsed:
+  body: resolution
+  commitment: low
+  temper: motivational
+  time_limit: <%= 1.day.ago %>
   user: one

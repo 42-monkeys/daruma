@@ -15,6 +15,30 @@ class ResolutionTest < ActiveSupport::TestCase
     assert(reminder.sent)
   end
 
+  test 'it dosn\'t generate double reminders' do
+    @resolution.generate_reminder
+
+    @resolution.generate_reminder
+
+    assert_equal(1, @resolution.reminders.count)
+  end
+
+  test 'it dosn\'t generate reminders for elasped resolutions' do
+    resolution = resolutions(:elapsed)
+
+    resolution.generate_reminder
+
+    assert_equal(0, resolution.reminders.count)
+  end
+
+  test 'it dosn\'t generate reminders with low commitment and already sent reminder in period' do
+    resolution = resolutions(:with_reminder)
+
+    resolution.generate_reminder
+
+    assert_equal(1, resolution.reminders.count)
+  end
+
   test 'it starts with no memory' do
     prompt = @resolution.prompt
 
@@ -22,7 +46,7 @@ class ResolutionTest < ActiveSupport::TestCase
   end
 
   test 'it continues with memory' do
-    resolution = resolutions(:two)
+    resolution = resolutions(:with_reminder)
 
     prompt = resolution.prompt
 
