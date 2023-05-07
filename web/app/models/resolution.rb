@@ -13,6 +13,8 @@ class Resolution < ApplicationRecord
   belongs_to :user
   has_many :reminders, dependent: :destroy
 
+  scope :active, -> { where('time_limit > ?', Time.zone.today) }
+
   def cost
     gpt_cost_per_token = 0.002 / 1000
     total_token_tor_resolution = reminders.sum('prompt_tokens + completion_tokens')
@@ -30,6 +32,7 @@ class Resolution < ApplicationRecord
       resolution: self
     )
     reminder.remind
+    reminder
   end
 
   def generate_ai_reminder
@@ -77,14 +80,14 @@ class Resolution < ApplicationRecord
   end
 
   def to_remind?
-    return false if time_limit < Date.today
+    return false if time_limit < Time.zone.today
 
     last_reminder_date = reminders.order(created_at: :desc).limit(1).pick(:created_at)&.to_date
     return true if last_reminder_date.nil?
 
-    return true if low_commitment? && last_reminder_date + 7.days <= Date.today
-    return true if moderate_commitment? && last_reminder_date + 3.days <= Date.today
-    return true if high_commitment? && last_reminder_date + 1.day <= Date.today
+    return true if low_commitment? && last_reminder_date + 7.days <= Time.zone.today
+    return true if moderate_commitment? && last_reminder_date + 3.days <= Time.zone.today
+    return true if high_commitment? && last_reminder_date + 1.day <= Time.zone.today
 
     false
   end
