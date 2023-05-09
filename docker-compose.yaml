@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    command: sh -c "bundle install && rails db:create && rails db:migrate && rails s -e production"
+    command: sh -c "crond && bundle install && rails db:create && rails db:migrate && rails s -e production"
     restart: on-failure
     volumes:
       - ./web:/app
