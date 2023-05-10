@@ -31,6 +31,7 @@
 
 en:
   resolutions:
+    title: "Resolutions"
     created: "Created"
     body: "Body"
     time_limit: "Time limit"
@@ -43,6 +44,7 @@ en:
     new_resolution: "New resolution"
     back_to_resolutions: "Back to resolutions"
   stats:
+    title: "Stats"
     total_spent: "Total Spent"
     total_offers: "Total offers"
 

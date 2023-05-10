@@ -1,5 +1,6 @@
 it:
   resolutions:
+    title: "Propositi"
     created: "Creata"
     body: "Proposito"
     time_limit: "Tempo limite"
@@ -12,6 +13,7 @@ it:
     new_resolution: "Nuovo proposito"
     back_to_resolutions: "Indietro ai propositi"
   stats:
+    title: "Statistiche"
     total_spent: "Totale spese"
     total_offers: "Totale offerte"
 

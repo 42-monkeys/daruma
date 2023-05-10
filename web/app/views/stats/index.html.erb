@@ -1,6 +1,8 @@
+  <h1><%= t("stats.title") %></h1>
+
   <p>
     <strong><%= t("stats.total_spent") %>:</strong>
-    <%= @stats[:total_spent] %>
+    <%= @stats[:total_spent].round(5) %>
     <br>
 
     <strong><%= t("stats.total_offers") %>:</strong>
