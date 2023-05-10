@@ -12,4 +12,6 @@ it:
     new_resolution: "Nuovo proposito"
     back_to_resolutions: "Indietro ai propositi"
   stats:
-    total_spent: "Spesa totale"
+    total_spent: "Totale spese"
+    total_offers: "Totale offerte"
+

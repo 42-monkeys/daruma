@@ -6,5 +6,6 @@ class StatsController < ApplicationController
   def index
     @stats = {}
     @stats[:total_spent] = Resolution.all.map(&:cost).sum # TODO: optimize :/
+    @stats[:total_offers] = Resolution.sum(:offer)
   end
 end
