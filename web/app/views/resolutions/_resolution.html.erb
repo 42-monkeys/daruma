@@ -21,6 +21,6 @@
     <%= resolution.offer || 0 %>
     <br>
     <strong><%= t("resolutions.cost_for_daruma") %>:</strong>
-    <%= resolution.cost.round(5) %> $
+    <%= resolution.cost.round(5) %> $ (<%= link_to t("resolutions.see_total"), stats_path %>)
   </p>
 </div>

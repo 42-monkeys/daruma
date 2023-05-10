@@ -7,6 +7,9 @@ it:
     temper: "Carattere"
     offer: "Offerta"
     cost_for_daruma: "Costi per Daruma"
+    see_total: "Guarda i totali"
     show_this_resolution: "Mostra questo proposito"
     new_resolution: "Nuovo proposito"
     back_to_resolutions: "Indietro ai propositi"
+  stats:
+    total_spent: "Spesa totale"

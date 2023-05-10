@@ -38,7 +38,10 @@ en:
     temper: "Temper"
     offer: "Offer"
     cost_for_daruma: "Cost for Daruma"
+    see_total: "See total"
     show_this_resolution: "Show this resolution"
     new_resolution: "New resolution"
     back_to_resolutions: "Back to resolutions"
+  stats:
+    total_spent: "Total Spent"
 
