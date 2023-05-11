@@ -22,5 +22,8 @@
     <br>
     <strong><%= t("resolutions.cost_for_daruma") %>:</strong>
     <%= resolution.cost.round(5) %> $ (<%= link_to t("resolutions.see_total"), stats_path %>)
+    <br>
+    <%= link_to t("resolutions.show_reminders"), resolution_reminders_path(resolution.id) %>
+
   </p>
 </div>

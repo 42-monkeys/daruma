@@ -1,0 +1,9 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%= t("reminders.title") %></h1>
+
+<div id="reminders">
+  <% @reminders.each do |reminder| %>
+    <%= render reminder %>
+  <% end %>
+</div>
