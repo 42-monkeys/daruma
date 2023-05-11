@@ -56,7 +56,7 @@ class Resolution < ApplicationRecord
     {
       prompt_tokens: response.dig('usage', 'prompt_tokens'),
       completion_tokens: response.dig('usage', 'completion_tokens'),
-      text: response.dig('choices', 0, 'message', 'content').gsub('```', '')
+      text: response.dig('choices', 0, 'message', 'content').gsub('`', '')
     }
   end
 
