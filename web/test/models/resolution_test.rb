@@ -3,6 +3,8 @@
 require 'test_helper'
 
 class ResolutionTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   setup do
     @resolution = resolutions(:one)
   end
@@ -10,9 +12,7 @@ class ResolutionTest < ActiveSupport::TestCase
   test 'it generate reminders' do
     @resolution.generate_reminder
 
-    reminder = @resolution.reminders.first
-    assert_equal(reminder.body, 'some generated text')
-    assert(reminder.sent)
+    assert_enqueued_with(job: SendRemindersJob, args: [@resolution.reminders.first])
   end
 
   test 'it dosn\'t generate double reminders' do

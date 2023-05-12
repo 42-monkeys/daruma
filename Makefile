@@ -6,3 +6,11 @@ deploy:
 dev:
 	docker compose up -d --build
 	docker image prune -f
+
+test-env:
+	docker compose down
+	docker compose --env-file .env.test up -d --build web redis
+	docker image prune -f
+
+test: test-env
+	docker exec -it daruma rails test
