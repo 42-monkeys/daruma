@@ -3,6 +3,7 @@
 class ApplicationController < ActionController::Base
   respond_to :html, :json
   before_action :authenticate_user!, :set_locale
+  before_action :set_timezone
   protect_from_forgery unless: -> { request.format.json? }
 
   protect_from_forgery with: :exception
@@ -27,5 +28,9 @@ class ApplicationController < ActionController::Base
     parsed_locale = params[:locale]
     locale_to_set = I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : I18n.locale
     I18n.locale = locale_to_set
+  end
+
+  def set_timezone
+    Time.zone = (cookies[:timezone].presence || Rails.application.config.time_zone)
   end
 end

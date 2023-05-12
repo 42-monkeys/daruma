@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   extend UserLanguages
+  before_save :set_timezone
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,6 +16,10 @@ class User < ApplicationRecord
   validates :language, presence: true, inclusion: { in: languages }
 
   enum :role, %i[std admin], suffix: true
+
+  def set_timezone
+    self.time_zone = Time.zone
+  end
 
   def send_notification
     android_device_tokens = devices.where(platform: 'android').pluck(:token)

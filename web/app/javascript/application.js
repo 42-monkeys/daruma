@@ -6,3 +6,8 @@ import "@rails/actiontext"
 
 import LocalTime from "local-time"
 LocalTime.start()
+
+document.addEventListener("DOMContentLoaded", function() {
+  var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  document.cookie = "timezone=" + encodeURIComponent(timezone) + "; path=/";
+});
