@@ -14,6 +14,8 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :language, presence: true, inclusion: { in: languages }
 
+  enum :role, %i[std admin], suffix: true
+
   def send_notification
     android_device_tokens = devices.where(platform: 'android').pluck(:token)
     return if android_device_tokens.blank?

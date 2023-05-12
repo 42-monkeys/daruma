@@ -1,10 +1,18 @@
 FROM ruby:3.2.2-alpine
-RUN apk add --no-cache build-base tzdata nodejs yarn sqlite-dev libpq-dev
+
+RUN apk update && apk add --no-cache build-base nodejs postgresql-dev tzdata
+
+RUN mkdir /app
 WORKDIR /app
-COPY web .
-RUN gem install bundler
-ENV RAILS_ENV=production
+
+COPY web/Gemfile web/Gemfile.lock ./
+RUN gem install bundler --no-document
+RUN bundle install --no-binstubs --jobs $(nproc) --retry 3
 RUN bundle install
+RUN rails db:create
+RUN rails db:migrate
 RUN bundle exec rails assets:precompile
-EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+
+COPY web .
+
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]

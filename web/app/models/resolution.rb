@@ -31,8 +31,7 @@ class Resolution < ApplicationRecord
       completion_tokens: ai_reminder[:completion_tokens],
       resolution: self
     )
-    reminder.remind
-    reminder
+    SendRemindersJob.perform_later(reminder)
   end
 
   def generate_ai_reminder

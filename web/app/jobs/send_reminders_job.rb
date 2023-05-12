@@ -3,7 +3,7 @@
 class SendRemindersJob < ApplicationJob
   queue_as :default
 
-  def perform(resolution)
-    resolution.generate_reminder
+  def perform(reminder)
+    reminder.remind
   end
 end

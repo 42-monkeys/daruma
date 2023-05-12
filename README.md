@@ -48,12 +48,33 @@ If people make offers, this amounts of money will be used to trade with NO risk 
 
 # Development
 
-rails console on container
+* use hooks
+```bash
+git config --local include.path ../.gitconfig
 ```
+
+* develop with docker
+
+```bash
+docker-compose up -d
+```
+
+* To launch the rails shell
+
+```bash
 docker exec -it daruma rails c
 ```
 
-debug
-```
+* To debug
+
+After `docker-compose up -d`
+```bash
 docker attach daruma
+```
+
+* To test
+
+After `docker-compose up -d`
+```bash
+docker exec -it daruma rails test
 ```

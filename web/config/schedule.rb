@@ -22,6 +22,6 @@
 # Learn more: http://github.com/javan/whenever
 set :job_template, "sh -l -c ':job'"
 
-every 1.day, at: '4:30 am' do
+every 1.day, at: '0:00 am' do
   rake 'daruma:generate_reminders'
 end
