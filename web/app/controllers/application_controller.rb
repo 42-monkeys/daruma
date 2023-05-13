@@ -28,6 +28,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_timezone
-    Time.zone = (cookies[:timezone].presence || Rails.application.config.time_zone)
+    Time.zone = (cookies[:timezone].presence || params.dig(:user, :time_zone) || Rails.application.config.time_zone)
   end
 end
