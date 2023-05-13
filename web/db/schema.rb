@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_113819) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_13_153644) do
   create_table "devices", force: :cascade do |t|
     t.integer "user_id"
     t.string "token"
@@ -130,6 +130,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_113819) do
     t.string "name"
     t.integer "role", default: 0
     t.string "time_zone"
+    t.string "confirmation_token"
+    t.string "unconfirmed_email"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.integer "sign_in_count"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

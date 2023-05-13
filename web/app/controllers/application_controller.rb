@@ -2,11 +2,8 @@
 
 class ApplicationController < ActionController::Base
   respond_to :html, :json
-  before_action :authenticate_user!, :set_locale
-  before_action :set_timezone
+  before_action :authenticate_user!, :set_locale, :set_timezone
   protect_from_forgery unless: -> { request.format.json? }
-
-  protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -14,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |u|
-      u.permit(:name, :email, :name, :language, :password)
+      u.permit(:name, :email, :name, :language, :password, :time_zone)
     end
 
     devise_parameter_sanitizer.permit(:account_update) do |u|

@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   end
   devise_for :users
 
+  resources :devices, only: %i[create]
+
   authenticate :user, ->(user) { user.admin_role? } do
     mount Sidekiq::Web => '/sidekiq'
   end

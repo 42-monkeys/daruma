@@ -2,7 +2,8 @@
 
 class DevicesController < ApplicationController
   def create
-    @device = Device.new(user: current_user.id, token: device_params[:token], platform: device_params[:platform])
+    @device = Device.find_or_initialize_by(user: current_user.id, token: device_params[:token],
+                                           platform: device_params[:platform])
 
     respond_to do |format|
       if @device.save
