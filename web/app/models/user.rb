@@ -34,6 +34,6 @@ class User < ApplicationRecord
       icon: 'path_to_your_app_icon'
     }
     n.save!
-    Rpush.delay.push
+    Rpush.push
   end
 end

@@ -2,12 +2,12 @@
 
 class DevicesController < ApplicationController
   def create
-    @device = Device.find_or_initialize_by(user: current_user.id, token: device_params[:token],
+    @device = Device.find_or_initialize_by(user: current_user, token: device_params[:token],
                                            platform: device_params[:platform])
 
     respond_to do |format|
       if @device.save
-        format.json { render :show, status: :created, location: @device }
+        format.json { render json: @device, status: :created }
       else
         format.json { render json: @device.errors, status: :unprocessable_entity }
       end

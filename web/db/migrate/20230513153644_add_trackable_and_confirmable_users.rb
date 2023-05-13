@@ -13,6 +13,6 @@ class AddTrackableAndConfirmableUsers < ActiveRecord::Migration[7.0]
     add_column :users, :current_sign_in_ip, :string
     add_column :users, :last_sign_in_ip, :string
 
-    add_index :users, :confirmation_token,   unique: true
+    add_index :users, :confirmation_token, unique: true
   end
 end

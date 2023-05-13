@@ -7,13 +7,25 @@ class Reminder < ApplicationRecord
   has_one :user, through: :resolution
 
   def remind
+    send_notification
     send_email
     self.sent = true
     save
   end
 
   def send_notification
-    # TODO: send to android
+    android_device_tokens = user.devices.where(platform: 'android').pluck(:token)
+    return if android_device_tokens.blank?
+
+    n = Rpush::Gcm::Notification.new
+    n.app = Rpush::Gcm::App.find_by(name: 'daruma')
+    n.registration_ids = android_device_tokens
+    n.data = {
+      title: 'The daruma reminder',
+      body:
+    }
+    n.save!
+    Rpush.push
   end
 
   def send_email
