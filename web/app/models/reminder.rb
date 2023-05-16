@@ -6,6 +6,14 @@ class Reminder < ApplicationRecord
   belongs_to :resolution
   has_one :user, through: :resolution
 
+  def created_at_formatted
+    created_at.to_date.to_s
+  end
+
+  def temper
+    resolution.temper
+  end
+
   def remind
     send_notification
     send_email
@@ -20,10 +28,13 @@ class Reminder < ApplicationRecord
     n = Rpush::Gcm::Notification.new
     n.app = Rpush::Gcm::App.find_by(name: 'daruma')
     n.registration_ids = android_device_tokens
+    n.content_available = true
     n.data = {
       title: 'The daruma reminder',
-      body:
+      message: body,
+      temper: resolution.temper
     }
+
     n.save!
     Rpush.push
   end
