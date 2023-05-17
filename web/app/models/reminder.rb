@@ -10,9 +10,7 @@ class Reminder < ApplicationRecord
     created_at.to_date.to_s
   end
 
-  def temper
-    resolution.temper
-  end
+  delegate :temper, to: :resolution
 
   def remind
     send_notification
