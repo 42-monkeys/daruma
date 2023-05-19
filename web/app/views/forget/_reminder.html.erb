@@ -1,0 +1,10 @@
+<div id="<%= dom_id reminder %>">
+  <p>
+    <strong><%= t("reminder.body") %>:</strong>
+    <%= reminder.body %>
+    <br>
+    <p>
+      <%= t("reminder.created") %> <%= time_tag reminder.created_at, "data-local": "time-ago" %>
+    </p>
+  </p>
+</div>

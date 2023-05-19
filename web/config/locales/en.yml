@@ -47,4 +47,8 @@ en:
     title: "Stats"
     total_spent: "Total Spent"
     total_offers: "Total offers"
+  forget:
+    title: "Forget me"
+    body: "Clicking here you will wipe all your informations from the system."
+    button: "Yes, forget me!"
 

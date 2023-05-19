@@ -16,4 +16,8 @@ it:
     title: "Statistiche"
     total_spent: "Totale spese"
     total_offers: "Totale offerte"
+  forget:
+    title: "Dimenticami"
+    body: "Cliccando qui tutti i tuoi dati saranno cancellati."
+    button: "Si, dimenticami!"
 
