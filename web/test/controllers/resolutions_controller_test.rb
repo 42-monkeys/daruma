@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class ResolutionsControllerTest < ActionDispatch::IntegrationTest
-  class Unauthorized < ActionDispatch::IntegrationTest
+  class Authorized < ActionDispatch::IntegrationTest
     include Devise::Test::IntegrationHelpers
     setup do
       @resolution = resolutions(:one)
@@ -40,7 +40,7 @@ class ResolutionsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  class Authorized < ActionDispatch::IntegrationTest
+  class Unauthorized < ActionDispatch::IntegrationTest
     setup do
       @resolution = resolutions(:one)
     end
