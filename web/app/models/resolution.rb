@@ -34,6 +34,10 @@ class Resolution < ApplicationRecord
     SendRemindersJob.perform_later(reminder)
   end
 
+  def resolution_ended_notification
+    ResolutionMailer.with(resolution: self).resolution_ended_email.deliver_now
+  end
+
   def generate_ai_reminder
     if Rails.env.test? || Rails.env.development?
       return {

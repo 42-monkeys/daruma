@@ -1,0 +1,18 @@
+Hi <%= @user.name %>!
+<br><br>
+This was your resolution:
+<br><br>
+<%= @resolution.body %>
+<br><br>
+Did you acheaved it?
+<br><br>
+<a href="<%= resolution_complete_path(resolution_id: @resolution.id, completed: true) %>">Yes</a>
+<a href="<%= resolution_complete_path(resolution_id: @resolution.id, completed: false) %>">No</a>
+<br>
+
+Be honest, from honesty comes all power, from lies come despair.
+
+<br><br>
+With love,
+<br>
+Daruma

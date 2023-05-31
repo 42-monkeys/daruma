@@ -5,6 +5,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   resources :resolutions, only: %i[index show new create] do
     get '/reminders', to: 'reminders#index'
+    get '/complete/:completed', to: 'resolutions#complete', as: :complete
   end
   devise_for :users
 

@@ -13,6 +13,15 @@ class ResolutionsController < ApplicationController
     @resolution = Resolution.new
   end
 
+  def complete
+    @resolution = Resolution.find_by(id: params[:id], user: current_user)
+    @resolution.completed = params[:completed]
+    respond_to do |format|
+      format.html { redirect_to resolution_url(@resolution), notice: 'Resolution was successfully completed!' }
+      format.json { render :show, status: :success, location: @resolution }
+    end
+  end
+
   def create
     @resolution = Resolution.new(resolution_params)
     @resolution.user = current_user
