@@ -28,6 +28,8 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
+    restart: on-failure
+
   redis:
     image: redis:alpine3.18
     command: redis-server
@@ -35,6 +37,8 @@ services:
       - "6379:6379"
     volumes:
       - ./tmp/redis:/data
+    restart: on-failure
+
   sidekiq:
     depends_on:
       - 'db'
@@ -48,3 +52,4 @@ services:
     environment:
       RAILS_ENV: ${RAILS_ENV}
       REDIS_URL_SIDEKIQ: ${REDIS_URL_SIDEKIQ}
+    restart: on-failure
