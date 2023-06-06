@@ -14,11 +14,16 @@ class ResolutionsController < ApplicationController
   end
 
   def complete
-    @resolution = Resolution.find_by(id: params[:id], user: current_user)
+    @resolution = Resolution.find_by(id: params[:resolution_id], user: current_user)
     @resolution.completed = params[:completed]
     respond_to do |format|
-      format.html { redirect_to resolution_url(@resolution), notice: 'Resolution was successfully completed!' }
-      format.json { render :show, status: :success, location: @resolution }
+      if @resolution.save
+        format.html { redirect_to resolution_url(@resolution), notice: 'Resolution was successfully completed!' }
+        format.json { render :show, status: :success, location: @resolution }
+      else
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @resolution.errors, status: :unprocessable_entity }
+      end
     end
   end
 

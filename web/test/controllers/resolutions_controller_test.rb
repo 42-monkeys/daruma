@@ -7,7 +7,9 @@ class ResolutionsControllerTest < ActionDispatch::IntegrationTest
     include Devise::Test::IntegrationHelpers
     setup do
       @resolution = resolutions(:one)
-      sign_in users(:one)
+      @user = users(:one)
+      @user.confirm
+      sign_in @user
     end
 
     test 'should get index' do
@@ -18,6 +20,16 @@ class ResolutionsControllerTest < ActionDispatch::IntegrationTest
     test 'should get new' do
       get new_resolution_url
       assert_response :success
+    end
+
+    test 'should set completed' do
+      get resolution_complete_url(resolution_id: @resolution.id, completed: 'true')
+      assert_redirected_to resolution_url(@resolution)
+    end
+
+    test 'should set not completed' do
+      get resolution_complete_url(resolution_id: @resolution.id, completed: 'false')
+      assert_redirected_to resolution_url(@resolution)
     end
 
     test 'should create resolution' do
@@ -64,6 +76,16 @@ class ResolutionsControllerTest < ActionDispatch::IntegrationTest
         user: :one
       } }
 
+      assert_response :redirect
+    end
+
+    test 'shouldn\'t set completed' do
+      get resolution_complete_url(resolution_id: @resolution.id, completed: 'true')
+      assert_response :redirect
+    end
+
+    test 'shouldn\'t set not completed' do
+      get resolution_complete_url(resolution_id: @resolution.id, completed: 'false')
       assert_response :redirect
     end
 

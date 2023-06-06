@@ -4,7 +4,6 @@ class ForgetController < ApplicationController
   def index; end
 
   def forget_me
-    debugger
     current_user.destroy
   end
 end

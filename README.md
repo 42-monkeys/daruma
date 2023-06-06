@@ -38,10 +38,6 @@ The offer is optional.
 
 Making an offer enhance your motivation to get your resolution done.
 
-Daruma will keep the offer with him and give that back if the resolution succeded.
-
-The success of the resolution is self declared, of course ;)
-
 # Business model
 
 If people make offers, this amounts of money will be used to trade with NO risk (but low income of course)
@@ -49,6 +45,7 @@ If people make offers, this amounts of money will be used to trade with NO risk 
 # Development
 
 * use hooks
+
 ```bash
 git config --local include.path ../.gitconfig
 ```
