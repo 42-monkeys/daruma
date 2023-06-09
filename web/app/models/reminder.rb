@@ -6,6 +6,8 @@ class Reminder < ApplicationRecord
   belongs_to :resolution
   has_one :user, through: :resolution
 
+  enum :temper, %i[motivational sarcastic authoritarian random], suffix: true
+
   def created_at_formatted
     created_at.to_date.to_s
   end
