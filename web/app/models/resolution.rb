@@ -29,6 +29,7 @@ class Resolution < ApplicationRecord
       body: ai_reminder[:text],
       prompt_tokens: ai_reminder[:prompt_tokens],
       completion_tokens: ai_reminder[:completion_tokens],
+      temper: ai_reminder[:temper],
       resolution: self
     )
     SendRemindersJob.perform_later(reminder)
@@ -48,23 +49,24 @@ class Resolution < ApplicationRecord
     end
 
     client = OpenAI::Client.new
-
+    temper = temper_for_request
     response = client.chat(
       parameters: {
         model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt.squish }]
+        messages: [{ role: 'user', content: prompt(temper).squish }]
       }
     )
 
     {
       prompt_tokens: response.dig('usage', 'prompt_tokens'),
       completion_tokens: response.dig('usage', 'completion_tokens'),
-      text: response.dig('choices', 0, 'message', 'content').gsub('`', '')
+      text: response.dig('choices', 0, 'message', 'content').gsub('`', ''),
+      temper:
     }
   end
 
-  def prompt
-    ret = "write a #{temper_for_request} sentence to motivate me using at most
+  def prompt(temper)
+    ret = "write a #{temper} sentence to motivate me using at most
     50 words in #{user.language} for my proposition."
 
     if reminders.count.positive?

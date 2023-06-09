@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_145209) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_09_144439) do
   create_table "devices", force: :cascade do |t|
     t.integer "user_id"
     t.string "token"
@@ -34,6 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_145209) do
     t.boolean "sent"
     t.integer "prompt_tokens"
     t.integer "completion_tokens"
+    t.integer "temper"
     t.index ["resolution_id"], name: "index_reminders_on_resolution_id"
   end
 

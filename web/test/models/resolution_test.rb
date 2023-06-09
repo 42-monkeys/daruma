@@ -40,7 +40,7 @@ class ResolutionTest < ActiveSupport::TestCase
   end
 
   test 'it starts with no memory' do
-    prompt = @resolution.prompt
+    prompt = @resolution.prompt('temper')
 
     assert_not(prompt.include?('must be different from these previous sentences, enclosed in double backticks'))
   end
@@ -48,7 +48,7 @@ class ResolutionTest < ActiveSupport::TestCase
   test 'it continues with memory' do
     resolution = resolutions(:with_reminder)
 
-    prompt = resolution.prompt
+    prompt = resolution.prompt('temper')
 
     assert(prompt.include?('must be different from these previous sentences, enclosed in double backticks'))
   end

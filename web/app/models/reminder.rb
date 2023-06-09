@@ -10,8 +10,6 @@ class Reminder < ApplicationRecord
     created_at.to_date.to_s
   end
 
-  delegate :temper, to: :resolution
-
   def remind
     send_notification
     send_email
@@ -30,7 +28,7 @@ class Reminder < ApplicationRecord
     n.data = {
       title: 'The daruma reminder',
       message: body,
-      temper: resolution.temper
+      temper:
     }
 
     n.save!
