@@ -2,6 +2,8 @@
 
 # Daruma
 
+![daruma](web/public/daruma.png)
+
 A simple app to add your resolutions and help you stick with those!
 
 The idea comes from the will of helping to stick with the chosen resolutions.
