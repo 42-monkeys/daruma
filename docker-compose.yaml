@@ -8,7 +8,7 @@ services:
     command: sh -c "crond && rm -f tmp/pids/server.pid && bundle install && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails s -b 0.0.0.0"
     stdin_open: true
     tty: true
-    restart: on-failure
+    restart: always
     volumes:
       - ./web:/app
     ports:
@@ -26,7 +26,7 @@ services:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
-    restart: on-failure
+    restart: always
 
   redis:
     image: redis:alpine3.18
@@ -35,7 +35,7 @@ services:
       - "6379:6379"
     volumes:
       - ./tmp/redis:/data
-    restart: on-failure
+    restart: always
 
   sidekiq:
     depends_on:
@@ -50,4 +50,4 @@ services:
     environment:
       RAILS_ENV: ${RAILS_ENV}
       REDIS_URL_SIDEKIQ: ${REDIS_URL_SIDEKIQ}
-    restart: on-failure
+    restart: always
