@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'daruma@42monkeys.eu'
+  default from: email_address_with_name('daruma@farnararo.it', 'daruma')
   layout 'mailer'
 end
